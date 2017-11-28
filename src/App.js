@@ -1,60 +1,84 @@
+import { groupBy } from 'lodash'
 import React, { Component } from 'react'
 import './App.css'
 
-const entries = [
+const now = {
+  BTC: 200,
+  ETH: 200,
+}
+
+const originalEntries = [
   {
-    BTC: [{ date: '2017-11-23 22:06:04', amount: 0.0123456, price: 1000.0001 }],
-    ETH: [
-      { date: '2017-07-18 10:46:03', amount: 1.00000001, price: 100.259 },
-      { date: '2017-11-23 22:06:04', amount: 0.5, price: 320.0001 },
-    ],
+    coin: 'BTC',
+    date: '2017-11-23 22:06:04',
+    amount: 1,
+    price: 1000.0001,
+  },
+  {
+    coin: 'ETH',
+    date: '2017-07-18 10:46:03',
+    amount: 1.00000001,
+    price: 100.259,
+  },
+  {
+    coin: 'ETH',
+    date: '2017-11-23 22:06:04',
+    amount: 0.5,
+    price: 320.0001,
   },
 ]
+
+const entries = groupBy(originalEntries, e => e.coin)
+const coins = Object.keys(entries)
 
 const history = [{ date: '2017-11-27 22:12:00', BTC: 8129.9, ETH: 401.05 }]
 
 const headers = coin => [coin, '€', 'amount', 'price']
 
+const paid = line => line.price * line.amount
+const cur_value = line => now[line.coin] * line.amount
+const gain = line => cur_value(line) - paid(line)
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <table className="table entries">
-          {entries.map(e =>
-            Object.entries(e).map(([k, v], i) => (
-              <tbody key={i}>
-                <tr>{headers(k).map((k, i) => <th key={i}>{k}</th>)}</tr>
+        <div className="now">
+          {Object.entries(now).map(([k, v], i) => (
+            <span>
+              <b>{k}</b>: {v}
+            </span>
+          ))}
+        </div>
 
-                {v.map(({ amount, date, price }, i) => (
-                  <tr key={i}>
-                    <td>{date}</td>
-                    <td>{amount * price}</td>
-                    <td>{amount}</td>
-                    <td>{price}</td>
-                  </tr>
-                ))}
-              </tbody>
-            ))
-          )}
-        </table>
-
-        <table className="table history">
-          <caption>Price history</caption>
-          <tbody>
-            <tr>
-              <th />
-              <th>BTC</th>
-              <th>ETH</th>
-            </tr>
-            {history.map((e, i) => (
-              <tr key={i}>
-                <td>{e.date}</td>
-                <td>{e.BTC}</td>
-                <td>{e.ETH}</td>
+        {coins.map(coin => (
+          <table className="table entries">
+            <thead>
+              <tr>
+                <th className="coin">{coin}</th>
+                <th className="date">date</th>
+                <th className="amount">amount</th>
+                <th className="price">price</th>
+                <th className="paid">paid</th>
+                <th className="cur_value">current</th>
+                <th className="gain">gain</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {entries[coin].map(line => (
+                <tr>
+                  <td className="coin" />
+                  <td className="date">{line.date}</td>
+                  <td className="amount">{line.amount}</td>
+                  <td className="price">{line.price}</td>
+                  <td className="paid">{paid(line)}</td>
+                  <td className="cur_value">{cur_value(line)}</td>
+                  <td className="gain">{gain(line)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ))}
       </div>
     )
   }

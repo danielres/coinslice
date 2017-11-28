@@ -3,15 +3,15 @@ body {
   padding: 20px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 20px;
-  padding: 4px;
+.now {
+  background: #999;
+  margin-bottom: 20px;
+  padding: 20px;
 }
 
-.App-title {
-  font-size: 1em;
-  margin: 0;
+.now span {
+  display: inline-block;
+  margin-left: 20px;
 }
 
 .table {
@@ -38,3 +38,13 @@ body {
   border-bottom: 20px solid #aaa;
 }
   
+.table.entries .date,
+.table.entries .amount,
+.table.entries .price,
+.table.entries .paid,
+.table.entries .cur_value,
+.table.entries .gain {
+  text-align: right;
+  width: calc(100% / 6);
+}
+
