@@ -3,7 +3,9 @@ import { groupBy } from 'lodash'
 import * as React from 'react'
 import './App.css'
 
-const now = {
+import type { NowValues } from './types'
+
+const now: NowValues = {
   BTC: 200,
   ETH: 200,
 }
