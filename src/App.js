@@ -1,5 +1,6 @@
+// @flow
 import { groupBy } from 'lodash'
-import React, { Component } from 'react'
+import * as React from 'react'
 import './App.css'
 
 const now = {
@@ -39,12 +40,14 @@ const paid = line => line.price * line.amount
 const cur_value = line => now[line.coin] * line.amount
 const gain = line => cur_value(line) - paid(line)
 
-class App extends Component {
+type Props = {}
+
+class App extends React.Component<Props> {
   render() {
     return (
       <div className="App">
         <div className="now">
-          {Object.entries(now).map(([k, v], i) => (
+          {Object.entries(now).map(([k, v]: any, i) => (
             <span key={k}>
               <b>{k}</b>: {v}
             </span>
