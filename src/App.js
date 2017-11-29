@@ -45,14 +45,14 @@ class App extends Component {
       <div className="App">
         <div className="now">
           {Object.entries(now).map(([k, v], i) => (
-            <span>
+            <span key={k}>
               <b>{k}</b>: {v}
             </span>
           ))}
         </div>
 
         {coins.map(coin => (
-          <table className="table entries">
+          <table className="table entries" key={coin}>
             <thead>
               <tr>
                 <th className="coin">{coin}</th>
@@ -65,8 +65,8 @@ class App extends Component {
               </tr>
             </thead>
             <tbody>
-              {entries[coin].map(line => (
-                <tr>
+              {entries[coin].map((line, i) => (
+                <tr key={i}>
                   <td className="coin" />
                   <td className="date">{line.date}</td>
                   <td className="amount">{line.amount}</td>
