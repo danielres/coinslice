@@ -4,12 +4,13 @@ import {
   applyMiddleware,
   compose as _compose,
 } from 'redux'
-
 import thunk from 'redux-thunk'
+
+import nowReducer from './now'
 
 const compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || _compose
 
-export const rootReducer = combineReducers({})
+export const rootReducer = combineReducers({ now: nowReducer })
 
 const middlewares = applyMiddleware(thunk)
 
