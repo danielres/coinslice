@@ -1,6 +1,10 @@
 // @flow
+import { connect } from 'react-redux'
 import { groupBy } from 'lodash'
 import * as React from 'react'
+
+import { fetchValues } from './store/now/actions'
+
 import './App.css'
 
 import type { NowValues } from './types'
@@ -42,9 +46,14 @@ const paid = line => line.price * line.amount
 const cur_value = line => now[line.coin] * line.amount
 const gain = line => cur_value(line) - paid(line)
 
-type Props = {}
+type Props = { init: Function }
 
 class App extends React.Component<Props> {
+  componentDidMount() {
+    const { init } = this.props
+    init()
+  }
+
   render() {
     return (
       <div className="App">
@@ -89,4 +98,7 @@ class App extends React.Component<Props> {
   }
 }
 
-export default App
+export default connect(
+  () => ({}),
+  dispatch => ({ init: () => dispatch(fetchValues()) })
+)(App)
