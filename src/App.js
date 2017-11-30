@@ -9,11 +9,6 @@ import './App.css'
 
 import type { NowValues } from './types'
 
-const now: NowValues = {
-  BTC: 200,
-  ETH: 200,
-}
-
 const originalEntries = [
   {
     coin: 'BTC',
@@ -43,18 +38,15 @@ const history = [{ date: '2017-11-27 22:12:00', BTC: 8129.9, ETH: 401.05 }]
 const headers = coin => [coin, '€', 'amount', 'price']
 
 const paid = line => line.price * line.amount
-const cur_value = line => now[line.coin] * line.amount
-const gain = line => cur_value(line) - paid(line)
+const cur_value = (line, now): number => now[line.coin] * line.amount
+const gain = (line, now): number => cur_value(line, now) - paid(line)
 
-type Props = { init: Function }
+type Props = { now: NowValues }
 
 class App extends React.Component<Props> {
-  componentDidMount() {
-    const { init } = this.props
-    init()
-  }
-
   render() {
+    const { now } = this.props
+
     return (
       <div className="App">
         <div className="now">
@@ -86,8 +78,8 @@ class App extends React.Component<Props> {
                   <td className="amount">{line.amount}</td>
                   <td className="price">{line.price}</td>
                   <td className="paid">{paid(line)}</td>
-                  <td className="cur_value">{cur_value(line)}</td>
-                  <td className="gain">{gain(line)}</td>
+                  <td className="cur_value">{cur_value(line, now)}</td>
+                  <td className="gain">{gain(line, now)}</td>
                 </tr>
               ))}
             </tbody>
@@ -99,6 +91,6 @@ class App extends React.Component<Props> {
 }
 
 export default connect(
-  () => ({}),
-  dispatch => ({ init: () => dispatch(fetchValues()) })
+  ({ now }) => ({ now }),
+  dispatch => ({ _init: dispatch(fetchValues()) })
 )(App)
