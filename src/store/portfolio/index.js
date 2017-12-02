@@ -11,7 +11,8 @@ export default (
     case 'PORTFOLIO/ADD_ENTRY':
       return [...state, action.payload]
     case 'PORTFOLIO/REMOVE_ENTRY':
-      return [...state.filter(e => e.id !== action.id)]
+      const { id } = action
+      return [...state.filter(e => e.id !== id)]
     default:
       return state
   }
