@@ -8,6 +8,16 @@ export type PortfolioEntry = {
   amount: number,
   price: number,
 }
+export type PortfolioFormEntry =
+  | {}
+  | {
+      id: ?number,
+      coin: ?string,
+      date: ?string,
+      amount: ?number,
+      price: ?number,
+    }
+
 // export type PortfolioEntries = Array<PortfolioEntry>
 
 export type Action =
@@ -16,3 +26,5 @@ export type Action =
   | { type: 'NOW/FAILURE', error: string }
   | { type: 'PORTFOLIO/ADD_ENTRY', payload: PortfolioEntry }
   | { type: 'PORTFOLIO/REMOVE_ENTRY', id: number }
+  | { type: 'PORTFOLIO_FORM/UPDATE', payload: PortfolioFormEntry }
+  | { type: 'PORTFOLIO_FORM/RESET' }
