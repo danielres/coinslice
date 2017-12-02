@@ -1,7 +1,5 @@
 // @flow
-
 import nowReducer from './index'
-
 import type { Action, NowValues } from '../../types'
 
 describe(`on NOW/SUCCESS`, () => {
