@@ -3,6 +3,6 @@
 export type NowValues = { [string]: number }
 
 export type Action =
-  | { type: 'NOW_REQUEST' }
-  | { type: 'NOW_SUCCESS', payload: NowValues }
-  | { type: 'NOW_FAILURE', error: string }
+  | { type: 'NOW/REQUEST' }
+  | { type: 'NOW/SUCCESS', payload: NowValues }
+  | { type: 'NOW/FAILURE', error: string }

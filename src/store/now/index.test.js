@@ -4,12 +4,12 @@ import nowReducer from './index'
 
 import type { Action, NowValues } from '../../types'
 
-describe(`on NOW_SUCCESS`, () => {
+describe(`on NOW/SUCCESS`, () => {
   it('Adds crypto values to NowValues', () => {
     const initialNowValues: NowValues = {}
 
     const action: Action = {
-      type: 'NOW_SUCCESS',
+      type: 'NOW/SUCCESS',
       payload: { BTC: 1, ETH: 2 },
     }
 
@@ -19,14 +19,14 @@ describe(`on NOW_SUCCESS`, () => {
   })
 })
 
-describe(`on NOW_FAILURE`, () => {
+describe(`on NOW/FAILURE`, () => {
   it('Empties state', () => {
     const initialNowValues: NowValues = {
       ETH: 1,
     }
 
     const action: Action = {
-      type: 'NOW_FAILURE',
+      type: 'NOW/FAILURE',
       error: 'Error message',
     }
 
