@@ -33,6 +33,7 @@ export type PortfolioFormErrors =
 export type PortfolioForm = {
   data: PortfolioNewEntry,
   errors: PortfolioFormErrors,
+  hasErrors: boolean,
 }
 
 export type Action =
