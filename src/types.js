@@ -24,7 +24,11 @@ export type PortfolioFormEntry =
       price: ?number,
     }
 
-// export type PortfolioEntries = Array<PortfolioEntry>
+export type PortfolioFormErrors =
+  | {}
+  | {
+      [string]: string,
+    }
 
 export type Action =
   | { type: 'NOW/REQUEST' }
@@ -32,5 +36,6 @@ export type Action =
   | { type: 'NOW/FAILURE', error: string }
   | { type: 'PORTFOLIO/ADD_ENTRY', payload: PortfolioNewEntry }
   | { type: 'PORTFOLIO/REMOVE_ENTRY', id: number }
-  | { type: 'PORTFOLIO_FORM/UPDATE', payload: PortfolioFormEntry }
   | { type: 'PORTFOLIO_FORM/RESET' }
+  | { type: 'PORTFOLIO_FORM/SET_ERRORS', errors: PortfolioFormErrors }
+  | { type: 'PORTFOLIO_FORM/UPDATE', payload: PortfolioFormEntry }

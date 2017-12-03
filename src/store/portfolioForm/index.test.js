@@ -37,3 +37,19 @@ describe(`on PORTFOLIO_FORM/RESET`, () => {
     expect(reducer(initial, action)).toEqual(expected)
   })
 })
+
+describe(`on PORTFOLIO_FORM/SET_ERRORS`, () => {
+  it('Sets errors, keeps data', () => {
+    const initial: State = { errors: {}, data: { id: 'id' } }
+    const action: Action = {
+      type: 'PORTFOLIO_FORM/SET_ERRORS',
+      errors: { name: 'is required' },
+    }
+    const expected: State = {
+      errors: { name: 'is required' },
+      data: { id: 'id' },
+    }
+
+    expect(reducer(initial, action)).toEqual(expected)
+  })
+})

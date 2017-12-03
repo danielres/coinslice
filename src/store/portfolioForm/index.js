@@ -11,6 +11,8 @@ export default (state: State = initialState, action: Action): State => {
       return { ...state, data: { ...state.data, ...action.payload } }
     case 'PORTFOLIO_FORM/RESET':
       return { ...initialState }
+    case 'PORTFOLIO_FORM/SET_ERRORS':
+      return { ...state, errors: { ...action.errors } }
     default:
       return state
   }
