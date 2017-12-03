@@ -1,16 +1,16 @@
 // @flow
 import type { Action, PortfolioFormEntry } from '../../types'
 
-type State = PortfolioFormEntry
+export type State = { errors: {}, data: PortfolioFormEntry }
 
-const initialState = {}
+export const initialState = { errors: {}, data: {} }
 
 export default (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case 'PORTFOLIO_FORM/UPDATE':
-      return { ...state, ...action.payload }
+      return { ...state, data: { ...state.data, ...action.payload } }
     case 'PORTFOLIO_FORM/RESET':
-      return {}
+      return { ...initialState }
     default:
       return state
   }
