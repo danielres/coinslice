@@ -9,7 +9,9 @@ export default (
 ): Array<PortfolioEntry> => {
   switch (action.type) {
     case 'PORTFOLIO/ADD_ENTRY':
-      return [...state, action.payload]
+      const newId =
+        state.map(e => e.id).reduce((a, v) => (a > v ? a : v), 1) + 1
+      return [...state, { ...action.payload, id: newId }]
     case 'PORTFOLIO/REMOVE_ENTRY':
       const { id } = action
       return [...state.filter(e => e.id !== id)]

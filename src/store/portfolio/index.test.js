@@ -20,11 +20,18 @@ const entry2 = {
   price: 1000.0001,
 }
 
+const newEntry = {
+  coin: 'BTC',
+  date: '2017-11-23 22:06:04',
+  amount: 5,
+  price: 5000,
+}
+
 describe(`on PORTFOLIO/ADD_ENTRY`, () => {
   it('Adds entry to portfolio', () => {
-    const initial: State = [entry1]
-    const action: Action = { type: 'PORTFOLIO/ADD_ENTRY', payload: entry2 }
-    const expected: State = [entry1, entry2]
+    const initial: State = [entry1, entry2]
+    const action: Action = { type: 'PORTFOLIO/ADD_ENTRY', payload: newEntry }
+    const expected: State = [entry1, entry2, { ...newEntry, id: 3 }]
 
     expect(reducer(initial, action)).toEqual(expected)
   })
