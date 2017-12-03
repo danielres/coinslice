@@ -5,6 +5,7 @@ import * as React from 'react'
 
 import { fetchValues } from './store/now/actions'
 
+import PortfolioForm from './PortfolioForm'
 import './App.css'
 
 import type { NowValues } from './types'
@@ -56,6 +57,8 @@ class App extends React.Component<Props> {
             </span>
           ))}
         </div>
+
+        <PortfolioForm />
 
         {coins.map(coin => (
           <table className="table entries" key={coin}>
