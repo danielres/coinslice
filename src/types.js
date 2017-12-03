@@ -30,6 +30,11 @@ export type PortfolioFormErrors =
       [string]: string,
     }
 
+export type PortfolioForm = {
+  data: PortfolioNewEntry,
+  errors: PortfolioFormErrors,
+}
+
 export type Action =
   | { type: 'NOW/REQUEST' }
   | { type: 'NOW/SUCCESS', payload: NowValues }
